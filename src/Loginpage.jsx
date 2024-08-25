@@ -28,21 +28,20 @@ function LoginPage() {
             <a href="/" className="forgot-password">Forgot password?</a>
           </form> */}
 
-
 <form name="contact" netlify>
-<input type="text" placeholder="Phone number, username, or email" />
-            <input type="password" placeholder="Password" />
-            <button type="submit">Login</button>
-            <div className="divider">
-              <hr className="line" />
-              <span>OR</span>
-              <hr className="line" />
-            </div>
-            <button className="facebook-login">Log in with Facebook</button>
-            <a href="/" className="forgot-password">Forgot password?</a>
-    
-  
+  <p>
+    <label>Name <input type="text" name="name" /></label>
+  </p>
+  <p>
+    <label>Email <input type="email" name="email" /></label>
+  </p>
+  <p>
+    <button type="submit">Send</button>
+  </p>
 </form>
+
+
+
         </div>
 
         <div className="signup-container">
