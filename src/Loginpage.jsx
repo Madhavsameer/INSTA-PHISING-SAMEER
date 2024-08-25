@@ -1,69 +1,66 @@
 import React from 'react';
 import './LoginPage.css';
+import ReactDOM from 'react-dom'
 
 function LoginPage() {
-  return (
-    <div className="login-page">
-      <div className="phone-container">
-        <img
-          src="https://www.instagram.com/static/images/homepage/home-phones.png/43cc71bb1b43.png"
-          alt="Instagram Mobile Preview"
-          className="phone-image"
-        />
-      </div>
 
-      <div className="login-form-container">
-        <div className="login-form">
-          <h1>Instagram</h1>
-          {/* <form>
-            <input type="text" placeholder="Phone number, username, or email" />
-            <input type="password" placeholder="Password" />
-            <button type="submit">Log In</button>
-            <div className="divider">
-              <hr className="line" />
-              <span>OR</span>
-              <hr className="line" />
-            </div>
-            <button className="facebook-login">Log in with Facebook</button>
-            <a href="/" className="forgot-password">Forgot password?</a>
-          </form> */}
+  const encode = (data) => {
+    return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+  }
 
-<form name="contact" netlify>
-  <p>
-    <label>Name <input type="text" name="name" /></label>
-  </p>
-  <p>
-    <label>Email <input type="email" name="email" /></label>
-  </p>
-  <p>
-    <button type="submit">Send</button>
-  </p>
-</form>
+  class ContactForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { name: "", email: "", message: "" };
+    }
 
+    /* Here’s the juicy bit for posting the form submission */
 
+    handleSubmit = e => {
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", ...this.state })
+      })
+        .then(() => alert("Success!"))
+        .catch(error => alert(error));
 
-        </div>
+      e.preventDefault();
+    };
 
-        <div className="signup-container">
-          <p>Don't have an account? <a href="/">Sign up</a></p>
-        </div>
+    handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
-        <div className="get-app">
-          <p>Get the app.</p>
-          <div className="app-stores">
-            <img
-              src="https://www.instagram.com/static/images/appstore-btn.png/68a64e0c0f4e.png"
-              alt="Download on the App Store"
-            />
-            <img
-              src="https://www.instagram.com/static/images/playstore-btn.png/3cd8a35915f9.png"
-              alt="Get it on Google Play"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    render() {
+      const { name, email, message } = this.state;
+      return (
+        <form onSubmit={this.handleSubmit}>
+          <p>
+            <label>
+              Your Name: <input type="text" name="name" value={name} onChange={this.handleChange} />
+            </label>
+          </p>
+          <p>
+            <label>
+              Your Email: <input type="email" name="email" value={email} onChange={this.handleChange} />
+            </label>
+          </p>
+          <p>
+            <label>
+              Message: <textarea name="message" value={message} onChange={this.handleChange} />
+            </label>
+          </p>
+          <p>
+            <button type="submit">Send</button>
+          </p>
+        </form>
+      );
+    }
+  }
+
+  ReactDOM.render(<ContactForm />, document.getElementById("root"));
+
 }
 
 export default LoginPage;
