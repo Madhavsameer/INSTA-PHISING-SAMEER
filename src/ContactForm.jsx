@@ -6,6 +6,7 @@ function ContactForm() {
     email: '',
     message: ''
   });
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -14,12 +15,31 @@ function ContactForm() {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString(),
+    })
+    .then(() => setFormSubmitted(true))
+    .catch((error) => alert(error));
+  };
+
+  if (formSubmitted) {
+    return <p>Thank you for your submission!</p>;
+  }
+
   return (
     <form
       name="contact"
       method="POST"
       data-netlify="true"
-      onSubmit="submit"
+      onSubmit={handleSubmit}
     >
       <input type="hidden" name="form-name" value="contact" />
       <p>
