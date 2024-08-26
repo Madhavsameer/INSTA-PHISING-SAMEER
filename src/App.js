@@ -1,11 +1,14 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import LoginPage from './Loginpage';
+import ContactForm from './ContactForm';
 
 function App() {
   return (
     <div className="App">
-     <LoginPage/>
+      <header className="App-header">
+        <h1>Contact Us</h1>
+      </header>
+      <ContactForm />
     </div>
   );
 }
